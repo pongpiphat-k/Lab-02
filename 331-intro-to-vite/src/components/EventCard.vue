@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Event } from '@/types';
+import type { Event } from '../types';
 defineProps<{
   event: Event;
 }>();
@@ -22,7 +22,11 @@ defineProps<{
     <h2>{{ event.title }}</h2>
     <span>@{{ event.time }} on {{ event.date }}</span>
   </div>
- </div>
+  <!-- <div class="event-card">
+    <h2>{{ event.category }}</h2>
+    <h2>Organizer: {{ event.organizer }}</h2>
+  </div> -->
+</div>
 </template>
 
 <style scoped>

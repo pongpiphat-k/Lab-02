@@ -1,9 +1,8 @@
 <script setup lang="ts">
-// Update the path below if EventCard.vue is in a different folder
 import EventCard from '../components/EventCard.vue';
+import EventDetailsCard from '../components/EventDetailsCard.vue';
 import type { Event } from '../types';
 import { ref } from 'vue';
-
 
 const events = ref<Event[]>([
   {
@@ -39,11 +38,30 @@ const events = ref<Event[]>([
     petsAllowed: false,
     organizer: 'Carey Wales'
   }
-])
+]);
 </script>
 
 <template>
-<div class="home">
-  <EventCard v-for="event in events" :key="event.id" :event="event" />
+  <div class="events-container">
+    <div class="event-column">
+      <EventCard v-for="event in events" :key="event.id" :event="event" />
+    </div>
+    <div class="event-column">
+      <EventDetailsCard v-for="event in events" :key="event.id" :event="event" />
+    </div>
   </div>
 </template>
+
+<style scoped>
+.events-container {
+  display: flex; /* Use flexbox to arrange columns side-by-side */
+  justify-content: center; /* Center the entire container */
+  gap: 20px; /* Add some space between the columns */
+}
+
+.event-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items within each column */
+}
+</style>
