@@ -6,6 +6,7 @@ import EventDetailView from '../views/event/DetailView.vue'
 import EventRegisterView from '../views/event/RegisterView.vue'
 import EventEditView from '../views/event/EditView.vue'
 import EventLayoutView from '../views/event/LayoutView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -25,30 +26,36 @@ const router = createRouter({
       name: 'student-list-view',
       component: StudentListView,
     },
+     {
+          path: '/:catchAll(.*)',
+          name: 'not-found', 
+          component: NotFoundView
+        },
     {
       path: '/events/:id',
       name: 'event-layout-view',
       component: EventLayoutView,
-      props: true, 
+      props: true,
       children: [
         {
           path: '',
           name: 'event-detail-view',
           component: EventDetailView,
-          props: true,
+          props: true
         },
         {
           path: 'register',
           name: 'event-register-view',
           component: EventRegisterView,
-          props: true,
+          props: true
         },
         {
           path: 'edit',
           name: 'event-edit-view',
           component: EventEditView,
-          props: true,
+          props: true
         }
+       
       ]
     }
   ]
