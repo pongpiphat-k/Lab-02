@@ -1,6 +1,13 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView,useRouter } from 'vue-router'
+import { ref, watch } from 'vue';
 
+const pageSize = ref(2); // Default page size
+const router = useRouter();
+
+watch(pageSize, (newSize) => {
+  router.push({ name: 'event-list-view', query: { size: newSize } });
+});
 </script>
 
 <template>
@@ -8,10 +15,15 @@ import { RouterLink, RouterView } from 'vue-router'
     <header>
       <div class="wapper">
         <nav>
-          <RouterLink to="/">Event</RouterLink> |
-          <RouterLink to="/students">Students</RouterLink> |
-          <RouterLink to="/about">About</RouterLink>
+          <RouterLink :to="{ name: 'event-list-view', query: {size: pageSize } }">Event</RouterLink> |
+          <RouterLink :to="{ name: 'student-list-view' }">Students</RouterLink> |
+          <RouterLink :to="{ name: 'about' }">About</RouterLink>
         </nav>
+        <label for="page-size">Events per page: </label>
+        <select id="page-size" v-model="pageSize">
+          <option v-for="size in [2,3,4,5,6]" :key="size" :value="size">{{ size }}</option>
+          <option value="all">All</option>
+        </select>
       </div>
     </header>
    
