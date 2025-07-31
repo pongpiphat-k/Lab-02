@@ -4,6 +4,7 @@ import { ref, watch } from 'vue';
 import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
 
+
 const store = useMessageStore()
 const { message } = storeToRefs(store)
 const pageSize = ref(2); // Default page size
@@ -15,7 +16,7 @@ watch(pageSize, (newSize) => {
 </script>
 
 <template>
-  <div id="layout">
+  <div class="text-center front-sans text-gray-700 antialias">
     <header>
       <div id="flashMessage" v-if="message">
         <h4>{{ message }}</h4>
@@ -39,14 +40,6 @@ watch(pageSize, (newSize) => {
 </template>
 
 <style>
-#layout {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-   text-align: center;
-  color:#2c3e50;
-}
-
 nav {
   padding: 30px;
 }
