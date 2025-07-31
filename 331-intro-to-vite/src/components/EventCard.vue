@@ -7,9 +7,9 @@ defineProps<{
 </script>
 
 <template>
-  <RouterLink class="event-link" :to="{ name: 'event-detail-view', params: { id: event.id} }">
-  <div class="cursor-pointer border border-gray-600 p-4 w-64 mb-6 hover:scale-101 hover:shadow-sp">
-    <h2>{{ event.title }}</h2>
+  <RouterLink class="text-[#2c3e50]" :to="{ name: 'event-detail-view', params: { id: event.id} }">
+  <div class="cursor-pointer border border-gray-600 p-[20px] w-[250px] mb-[18px] hover:scale-101 hover:shadow-sp">
+    <h2 class="text-[20px]">{{ event.title }}</h2>
     <span>@{{ event.time }} on {{ event.date }}</span>
   </div>
   <!-- <div class="event-card">
@@ -20,17 +20,17 @@ defineProps<{
 </template>
 
 <style scoped>
-.event-card {
+/* .event-card {
  padding: 20px;
  width: 250px;
  cursor: pointer;
  border: 1px solid #39496c;
  margin-bottom: 18px;
-}
+} */
 
-.event-link {
+/* .event-link {
  text-decoration: none;
- color: #2c3e50;
+ color: #3474b4;
 
-}
+} */
 </style> 

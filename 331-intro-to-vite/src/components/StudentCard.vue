@@ -1,5 +1,5 @@
 <template>
-  <div class="student-card">
+  <div class="p-[20px] w-[250px] cursor-pointer border border-gray-600 mb-[18px] hover:scale-101 hover:shadow-sp">
     <h2>{{ student.name }} {{ student.surname }}</h2>
     <p>GPA: {{ student.gpa }}</p>
   </div>
@@ -17,7 +17,7 @@ const props = defineProps<{
 }>();
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .student-card {
  padding: 20px;
  width: 250px;
@@ -29,4 +29,4 @@ const props = defineProps<{
  transform: scale(1.01);
  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
 }
-</style>
+</style> -->
