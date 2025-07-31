@@ -16,6 +16,7 @@ watch(pageSize, (newSize) => {
 </script>
 
 <template>
+  <SpeedInsights/>
   <div class="text-center front-sans text-gray-700 antialias">
     <header>
       <div id="flashMessage" class="animate-fade" v-if="message">
