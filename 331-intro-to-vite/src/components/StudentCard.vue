@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 
-const props = defineProps<{
+const { student } = defineProps<{
   student: {
     name: string;
     surname: string;

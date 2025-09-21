@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://my-json-server.typicode.com/pongpiphat-k/Lab-02', 
+  baseURL: import.meta.env.VITE_BACKEND_URL, 
   withCredentials: false, 
   headers: {
     'Accept': 'application/json',
@@ -10,10 +10,14 @@ const apiClient = axios.create({
 });
 
 export default {
-  getEvents(perPage: Number, page: Number) {
+  getEvents(perPage: number, page: number) {
     return apiClient.get('/events?_limit=' + perPage + '&_page=' + page);
   },
   getEvent (id: number){
     return apiClient.get('/events/' + id)
   },
+  saveEvent (event: Event) {
+    return apiClient.post('/events', event)
+  },
+
 };
