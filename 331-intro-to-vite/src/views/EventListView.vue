@@ -22,25 +22,30 @@ const hasNexPage = computed(() => {
 
 onMounted(() => {
   watchEffect(() => {
-    EventService.getEvents(size.value, page.value)
-      .then((response) => {
-        events.value = response.data;
+    // EventService.getEvents(size.value, page.value)
+    //   .then((response) => {
+    //     events.value = response.data;
         
-        totalEvents.value = response.headers['x-total-count']
-      })
-      .catch((error) => {
-        console.error('There was an error!', error);
-      })
-     
+    //     totalEvents.value = response.headers['x-total-count']
+    //   })
+    //   .catch((error) => {
+    //     console.error('There was an error!', error);
+    //   })
+    updateKeyword() 
   })
 })
 
 const keyword = ref('')
   function updateKeyword() {
   let queryFunction;
+  let apiUrl;
   if (keyword.value === '') {
+    apiUrl = `/events&_page=${page.value}`;
+    console.log('API Call:', apiUrl);
     queryFunction = EventService.getEvents(3, page.value)
   } else {
+    apiUrl = `/events?title=${keyword.value}&_page=${page.value}`;
+    console.log('API Call:', apiUrl);
     queryFunction = EventService.getEventByKeyword(keyword.value, 3, page.value)
   }
 
