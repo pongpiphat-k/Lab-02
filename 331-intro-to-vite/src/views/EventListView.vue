@@ -4,9 +4,11 @@ import EventDetailsCard from '../components/EventDetailsCard.vue';
 import EventService from '../services/EventService';
 import { type Event } from '../types';
 import { ref, onMounted, computed, watchEffect } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import BaseInput from '@/components/BaseInput.vue';
 
 const route = useRoute();
+const router = useRouter();
 const events = ref<Event[] | null>(null)
 const totalEvents = ref(0)
 
@@ -33,11 +35,37 @@ onMounted(() => {
   })
 })
 
+const keyword = ref('')
+  function updateKeyword() {
+  let queryFunction;
+  if (keyword.value === '') {
+    queryFunction = EventService.getEvents(3, page.value)
+  } else {
+    queryFunction = EventService.getEventByKeyword(keyword.value, 3, page.value)
+  }
+
+  queryFunction
+    .then((response: import('axios').AxiosResponse<Event[]>) => {
+      events.value = response.data
+      console.log('events', events.value)
+
+      totalEvents.value = Number(response.headers['x-total-count'])
+      console.log('totalEvent', totalEvents.value)
+    })
+    .catch(() => {
+      router.push({ name: 'NetworkError' })
+    })
+}
+
 </script>
 
 <template>
    <h1>Events For Good</h1>
   <div class="flex flex-col items-center ">
+    <div class="w-64">
+      <BaseInput v-model="keyword" label="Search..." class="w-full" @input="updateKeyword"/>
+      <p>test</p>
+    </div>
     <div class="flex flex-col items-center">
       <EventCard v-for="event in events" :key="event.id" :event="event" />
     </div>
