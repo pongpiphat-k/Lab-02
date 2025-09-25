@@ -69,8 +69,8 @@ const keyword = ref('')
   <div class="flex flex-col items-center ">
     <div class="w-64">
       <BaseInput v-model="keyword" label="Search..." class="w-full" @input="updateKeyword"/>
-      <p>test</p>
     </div>
+    <br>
     <div class="flex flex-col items-center">
       <EventCard v-for="event in events" :key="event.id" :event="event" />
     </div>
