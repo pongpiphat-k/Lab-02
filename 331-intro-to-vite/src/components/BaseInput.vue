@@ -33,12 +33,12 @@ interface BaseInputProps {
   label: string
 }
 const props = withDefaults(defineProps<BaseInputProps>(), {
-  label: ' '
+  label: ''
 })
 </script>
 <template>
   <label v-if="label">
     {{ props.label }}
   </label>
-  <inout class="mb-6" v-bind="$attrs" v-model="modelValue" :placeholder="label" />
+  <input class="mb-6" v-bind="$attrs" v-model="modelValue" :placeholder="label" />
 </template>

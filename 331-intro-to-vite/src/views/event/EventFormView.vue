@@ -1,11 +1,14 @@
 
 <script setup lang="ts">
-import { Event } from '@/type'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import EventService from '@/services/EventService'
 import { useRouter } from 'vue-router';
 import { useMessageStore } from '@/stores/message';
 import BaseInput from '@/components/BaseInput.vue';
+import type { Organizer } from '@/types';
+import OrganizerService from '@/services/OrganizerService';
+import { type Event } from '@/type';
+
 
 const event = ref<Event>({
   category: '',
@@ -37,6 +40,17 @@ function saveEvent() {
       router.push({ name: 'network-error-view' })
     })
 }
+
+const organizers = ref<Organizer[]>([])
+onMounted(() => {
+  OrganizerService.getOrganizers()
+    .then((response) => {
+      organizers.value = response.data
+    })
+    .catch(() => {
+      router.push({ name: 'network-error-view' })
+    })
+})
 
 </script>
 
@@ -83,7 +97,18 @@ function saveEvent() {
       /> -->
       <BaseInput v-model="event.location" type="text" label="Location"/>
       <br>
-
+      <h3>Who is your organizer?</h3>
+      <label>Select an Organizer</label>
+      <select v-model="event.organizer.id">
+        <option 
+          v-for="option in organizers"
+          :value="option.id" 
+          :key="option.id" 
+          :selected="option.id === event.organizer.id"
+          >
+          {{ option.name }}
+        </option>
+      </select>
       <button class="button" type="submit">Submit</button>
     </form>
 
