@@ -11,6 +11,12 @@ const event = ref<Event>({
   title: '',
   description: '',
   location: '',
+  time: '',
+  petAllowed: false,
+  organizer: {
+    id: 0,
+    name: ''
+  }
   
 })
 
